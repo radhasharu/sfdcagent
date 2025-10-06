@@ -1,0 +1,24 @@
+<template>
+    <lightning-card  title="Permission Sets">
+        <div class="slds-m-around_medium" >
+            <div class="slds-select_container">
+                <select class="slds-select" data-my-id="PermissionSet">
+                    <option value="">--None--</option>
+                    <template for:each={permissionsetList}
+                        for:item="permissionset">
+                            <option value={permissionset.Id} key={permissionset.Id} >{permissionset.Label}
+                            </option>
+        
+                    </template>
+                </select>
+            </div>
+            <br/>
+            <lightning-button variant="brand" label="Download PS Details" title="Download PS Details" onclick={getPermissionSetDetails} 
+            class=" slds-float_right slds-m-right_x-small"></lightning-button>
+          <br/>
+          <br/>
+          <br/>
+        
+        </div>
+    </lightning-card>
+</template>

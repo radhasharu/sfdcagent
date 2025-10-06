@@ -1,0 +1,44 @@
+<template>
+    <!--primitive data-->
+    <c-p2c-alert-component
+    message = {message}
+    card-heading = {cardHeading}
+    number-value = 20
+    is-valid = false
+    is-validtrue>
+</c-p2c-alert-component>
+
+ <!--non primitive data-->
+<div class = "slds-m-bottom_medium">
+    <c-p2c-carousel-component
+    carousel-details = {carouselData}>
+    </c-p2c-carousel-component>
+</div>
+
+<!--on action-->
+
+<div class = "slds-m-bottom_medium">
+    <lightning-card  title="Parent to Child Communication using non-Primitive Data Type">
+        <div class="slds-m-around_medium">
+    <lightning-input type ='number' label = 'Enter percentage' onchange = {changeEventHandler}></lightning-input>
+
+    <div class = "slds-m-top_medium">
+    <c-p2c-progressbar-component percent = {percent}></c-p2c-progressbar-component>
+    </div>
+    </div>
+    </lightning-card>
+</div>
+
+<!--Calling child method from Parent Component-->
+
+<div class = "slds-m-top_medium">
+    <lightning-button variant="success" label="Success" title="Successful action" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+    <div class = "slds-m-top_medium">
+    <c-p2c-slider-component></c-p2c-slider-component>
+    </div>
+    
+</div>
+
+
+
+</template>

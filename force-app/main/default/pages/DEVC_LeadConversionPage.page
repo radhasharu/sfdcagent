@@ -1,0 +1,43 @@
+<apex:page standardController="Lead" extensions="DEVC_LeadConversion">
+
+
+
+<apex:form id="form">
+    <apex:pageBlock id="theBlock">
+        <apex:pageBlockSection title="Select Checkbox" columns="3">
+            <apex:inputCheckbox value="{!Lead.Account__c}">
+                <apex:actionSupport event="onchange" rerender="theBlock"/>
+            </apex:inputCheckbox>
+            
+            <apex:inputCheckbox value="{!Lead.Contact__c}">
+                <apex:actionSupport event="onchange" rerender="theBlock"/>
+            </apex:inputCheckbox>
+            
+            <apex:inputCheckbox value="{!Lead.Opportunity__c}">
+                <apex:actionSupport event="onchange" rerender="theBlock"/>
+            </apex:inputCheckbox>
+            
+        
+        </apex:pageBlockSection>
+        
+        <apex:pageBlockSection title="Account" rendered="{!(Lead.Account__c== true)}" columns="2">
+            <apex:inputField value="{!Lead.Company}" label="Account Name"/>        
+        </apex:pageBlockSection>
+        
+        <apex:pageBlockSection title="Contact" rendered="{!(Lead.Contact__c== true)}" >
+            <apex:inputField value="{!Lead.Name}"/>
+
+            <apex:inputField value="{!Lead.Salutation}"  />
+            <apex:inputField value="{!Lead.FirstName}" />
+            <apex:inputField value="{!Lead.LastName}" />
+            
+            
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Opportunity" rendered="{!(Lead.Opportunity__c== true)}">
+           <apex:inputField value="{!Lead.Opportunity_Name__c}" label="Opportunity Name"/>
+        </apex:pageBlockSection>
+        <apex:commandButton action="{!convert}" value="Convert" rerender="form"/> 
+    </apex:pageBlock>
+    </apex:form>
+
+</apex:page>

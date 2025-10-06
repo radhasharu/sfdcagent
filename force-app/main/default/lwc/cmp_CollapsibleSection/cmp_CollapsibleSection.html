@@ -1,0 +1,28 @@
+<template>
+        
+          <!--section 1 start-->  
+          <span class="slds-section slds-is-open" id="sectionSection">
+            <!--section header-->
+            <div onclick={toggleSection} data-id="sectionSection">
+            <h3 class="slds-section__title">
+                <button aria-controls="sectionlist" class="slds-button slds-section__title-action" style="bottom: 9px;">
+                                                 
+                        <lightning-icon icon-name="utility:switch"
+                                        size="x-small"
+                                        class="slds-section__title-action-icon slds-button__icon_left"
+                                        alternative-text="button icon" 
+                                        ></lightning-icon>
+                    
+                    <span class="slds-truncate" title="section">{sectionHeader}</span>
+              
+                </button>
+            </h3>
+        </div>
+            <!--section body-->
+            <div class="slds-section__content"  id="sectionlist" style="padding-top: 0px;">
+                <slot></slot>
+               <!--used to send the body-->
+            </div>
+          </span>
+        <!--section 1 end-->
+    </template>

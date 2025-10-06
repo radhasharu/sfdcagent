@@ -1,0 +1,14 @@
+<apex:page controller="VehicleController" >
+   
+    <apex:form >
+        
+        <apex:pageBlock >
+            <apex:pageBlockTable value="{!vehicles}" var="vehicle">
+                <apex:column value="{!vehicle.Name}"/> 
+                <apex:column value="{!vehicle.Vehicle_Make__c}"/>   
+                <apex:column value="{!vehicle.Num_of_Vehicles__c}"/>   
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+        
+    </apex:form>
+</apex:page>

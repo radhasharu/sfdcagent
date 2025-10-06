@@ -1,0 +1,22 @@
+<template>
+    
+    <lightning-card title='Object info'>
+        <div class='slds-p-around_medium'>
+            
+            {defaultrectypeId}
+            {objName}
+        </div>
+    </lightning-card>
+
+    <lightning-card title='Objects info'>
+        <div class='slds-p-around_medium'>
+            
+            <template for:each={results} for:item="obj">
+                <div key = {obj.result.apiName}> {obj.result.apiName} </div>
+            </template>
+            
+        </div>
+    </lightning-card>
+    
+    
+</template>

@@ -1,0 +1,44 @@
+<template>
+    <lightning-card title = 'inline styling'> <!--we can use style attribute but not recommended-->
+        <div class = 'slds-m-around_medium'>
+            <div style = 'color:red;font-weight:bold;font-size:20px'> Hello i am div tag</div>
+        </div>
+    </lightning-card>
+
+    <lightning-card title = 'External styling'> <!--we have to create a css file-->
+        <div class = 'slds-m-around_medium'>
+           <p>I am p tag</p>
+           <div class="user">Lightning Web Components</div>
+        </div>
+    </lightning-card>
+
+    <lightning-card title = 'Lighnting Design System'> 
+        <div class ='slds-var-p-around_medium'>
+        <div class="slds-box ">
+            <p>This is a regular-sized box.</p>
+        </div>
+    </div>
+    </lightning-card>
+
+    <lightning-card title = 'SLDS Design Tokens'> 
+        <div class = 'slds-m-around_medium'>
+            <div class="sldsToken">Hello Everyone</div>
+        </div>
+    </lightning-card>
+
+    
+    <lightning-card title = 'Dynamic CSS'> 
+        <div class = 'slds-m-around_medium'>
+            <lightning-input 
+              type="number"
+              label="Enter some number"
+              value = {percent}
+              onchange = {changeHandler}
+            ></lightning-input>
+            <div style = {percentage} class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role = 'alert'>
+                Hiiiiiiii!!!!!!!!!!!!!!!
+            </div>
+        </div>
+    </lightning-card>
+    
+</template>

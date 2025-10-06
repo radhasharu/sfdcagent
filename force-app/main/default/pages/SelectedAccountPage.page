@@ -1,0 +1,33 @@
+<apex:page controller="DEVC_SelectedAccount" >
+<apex:stylesheet value="{!$Resource.bootstrap}" />
+<apex:sectionHeader title="Account Details"/>
+<apex:form >
+<apex:pageBlock >
+<apex:pageBlockSection >
+<apex:dataTable value="{!accounts}" var="account" id="theTable"
+   styleClass="table table-bordered table-striped table hover text-center table-sm" >
+    <apex:column >
+    <apex:facet name="header">Select</apex:facet>
+    <apex:inputCheckbox />
+    </apex:column>
+    <apex:column >
+        <apex:facet name="header">Name</apex:facet>     
+        <apex:outputText value="{!account.name}"/>
+    </apex:column>
+
+    <apex:column >
+        <apex:facet name="header">Phone</apex:facet>       
+        <apex:outputText value="{!account.Phone}"/>
+    </apex:column>
+    
+    <apex:column >
+        <apex:facet name="header">Account Site</apex:facet>       
+        <apex:outputText value="{!account.Site}"/>
+    </apex:column>
+</apex:dataTable>
+</apex:pageBlockSection>
+<apex:commandButton value="Selected Accounts"/>
+
+</apex:pageBlock>
+ </apex:form>
+</apex:page>

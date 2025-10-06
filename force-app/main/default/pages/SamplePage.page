@@ -1,0 +1,6 @@
+<apex:page controller="DemoClass" standardstylesheets="false">
+<apex:stylesheet value="{!$Resource.cssStyle}"/>
+<h1> This text is displayed using CSS </h1>
+   
+<p class="loading">Loading</p>
+</apex:page>

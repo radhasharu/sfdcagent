@@ -1,0 +1,19 @@
+<template>
+
+    <lightning-card title = {cardHeading}>
+        <div class="slds-notify_alert slds-theme_error" role="alert">
+                {message} 
+                <br/>
+                {numberValue}
+                <br/>
+                {isValid}
+                <br/>
+                {isValidtrue}
+                <br/>
+                <br/>
+                <lightning-input type = 'text' onchange = {changeHandler}></lightning-input>
+        </div>
+    </lightning-card>
+   
+    
+</template>

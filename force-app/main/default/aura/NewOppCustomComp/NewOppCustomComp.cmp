@@ -1,0 +1,66 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,lightning:actionOverride,force:lightningQuickAction" access="global" >
+    
+    
+    
+    <aura:attribute name="disabled" type="Boolean" default="false" />
+    <aura:attribute name="saved" type="Boolean" default="false" />
+    <aura:attribute name="showSpinner" type="Boolean" default="true" />
+    <aura:attribute name="recordId" type="String" />
+    <div class="c-container">
+        
+            <div class="slds-grid">
+                <div class="slds-col slds-size_4-of-12" ></div>
+                <div class="slds-col slds-size_4-of-12">
+                    
+                    
+                    <aura:if isTrue="{!v.showSpinner}">
+                        <lightning:spinner variant="brand" alternativeText="Loading" size="large"  />
+                    </aura:if>
+                    <aura:if isTrue="{!!v.saved}">
+                         
+                        <lightning:recordEditForm
+                                                  onload="{!c.handleLoad}"
+                                                  onsubmit="{!c.handleSubmit}"
+                                                  onsuccess="{!c.handleSuccess}"
+                                                  objectApiName="Opportunity">
+                            <!-- the messages component is for error messages -->
+                            <lightning:messages />
+                           
+                            <lightning:layout  multipleRows="true">
+                           
+                            
+                            <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="6" padding="around-large">
+                                <lightning:inputField fieldName="Name" />
+                            </lightning:layoutItem>
+                            <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="6" padding="around-large">
+                                <lightning:inputField fieldName="StageName" />
+                            </lightning:layoutItem>
+                            <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="6" padding="around-large">
+                                <lightning:inputField fieldName="Location_Preferred__c" />
+                            </lightning:layoutItem>
+                            <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="6" padding="around-large">
+                                <lightning:inputField fieldName="CloseDate" />
+                            </lightning:layoutItem>
+                            <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="6" padding="around-large">
+                                <lightning:inputField fieldName="How_many_people_you_need_to_accommodate__c" />
+                            </lightning:layoutItem>
+                            
+                           
+                            <div class="slds-m-top_medium">
+                                <lightning:button  disabled="{!v.disabled}" variant="brand" type="submit" name="save" label="Save" />
+                                
+                            </div>
+                              </lightning:layout>
+                        </lightning:recordEditForm>
+                        
+                        
+                        <aura:set attribute="else">
+                            <p>Saved! New record id is {!v.recordId}</p>
+                        </aura:set>
+                    </aura:if>
+                </div>     
+                <div class="slds-col slds-size_4-of-12"></div>  
+            </div>
+      
+    </div>
+</aura:component>

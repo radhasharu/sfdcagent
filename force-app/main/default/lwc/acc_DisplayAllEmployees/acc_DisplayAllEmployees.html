@@ -1,0 +1,44 @@
+<template>
+    <template lwc:if={displayTable}>
+
+        <lightning-layout class = 'slds-p-bottom_xx-large'> 
+            <lightning-layout-item flexibility="auto">
+                <lightning-input type="search" label='Employee Id' lwc:ref="searchElem" placeholder="Enter Employee ID"
+                value = {searchEmpId}
+                    onchange={handleSearchChange}></lightning-input>
+            </lightning-layout-item>
+        </lightning-layout>
+
+        <div class="slds-card_boundary">
+            <lightning-card title="Employee List">
+                <lightning-button class="slds-text-heading_small slds-float_right" style='border-radius: 12px;'
+                    slot="actions" label="Refresh List" onclick={refreshDatatable}
+                    variant="brand-outline" icon-name="utility:refresh"></lightning-button>
+
+                <lightning-datatable key-field="Name" data={visibleEmployeeData} columns={employeeColumns}
+                    hide-checkbox-column >
+                </lightning-datatable>
+
+                <lightning-layout horizontal-align='center' class="slds-p-top_medium">
+                    <lightning-layout-item>
+                        <lightning-button label="Previous" icon-name="utility:chevronleft" onclick={previousHandler}
+                            disabled={disablePrevious} variant="base" class="slds-p-right_small"></lightning-button>
+                    </lightning-layout-item>
+                    <lightning-layout-item class="slds-p-top_x-small">
+                        ( {currentPage} - {totalPage} )
+                    </lightning-layout-item>
+                    <lightning-layout-item>
+                        <lightning-button class="slds-p-left_small" label="Next" icon-name="utility:chevronright"
+                            icon-position="right" onclick={nextHandler} disabled={disableNext}
+                            variant="base"></lightning-button>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-card>
+        </div>
+    </template>
+
+    <template lwc:if={showSpinner}>
+        <lightning-spinner alternative-text="Loading" size="small" variant="brand"></lightning-spinner>
+    </template>
+
+</template>

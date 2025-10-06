@@ -1,0 +1,151 @@
+<aura:component controller="OpportunityController" implements="flexipage:availableForRecordHome,force:hasRecordId,lightning:actionOverride,force:lightningQuickAction">
+    <ltng:require styles="/resource/bootstrap"/>
+    <aura:dependency resource="markup://force:navigateToSObject" type="EVENT"/>
+    <aura:attribute name="isOpen" type="boolean" default="false"/>
+    <aura:attribute name="showSpinner" type="Boolean" default="true" />
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="saved" type="Boolean" default="false" />
+    <aura:attribute name="disabled" type="Boolean" default="false" />
+    
+     <aura:attribute type="Opportunity[]" name="oppList"/>
+    <aura:attribute name="mycolumns" type="List"/>
+    
+     <aura:handler name="init" value="{!this}" action="{!c.fetchList}"/>
+    
+    
+    <div  style="font-weight:bold;color:red;font-family:monotype corsiva;text-align:center;font-size:35px;">Lightning Card Demo</div>
+    <lightning:card  title="Opportunities" iconName="standard:opportunity" class="slds-theme_info">
+        
+        <aura:set attribute="actions">
+            <lightning:button label="New" title="New Opportunity" onclick="{!c.openModel}"/>
+        </aura:set>
+        <p class="slds-p-horizontal_small">
+            Click New to create new Opportunity
+        </p>
+    </lightning:card>
+    
+   
+  
+
+   
+    <lightning:datatable data="{! v.oppList}"
+                         columns="{! v.mycolumns }"
+                         keyField="id"
+                         hideCheckboxColumn="true" />
+ 
+    
+    <aura:if isTrue="{!v.isOpen}">
+        <aura:if isTrue="{!v.showSpinner}">
+            <lightning:spinner variant="brand" alternativeText="Loading" size="large"  />
+        </aura:if>
+        <!--###### MODAL BOX Start######--> 
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_medium">
+            <div class="slds-modal__container">
+                <!-- ###### MODAL BOX HEADER Start ######-->
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close"
+                                          onclick="{! c.closeModel }"
+                                          alternativeText="close"
+                                          variant="bare-inverse"
+                                          class="slds-modal__close"/>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">New Opportunity</h2>
+                </header>
+                <!--###### MODAL BOX BODY Part Start######-->
+                <div class="slds-modal__content" id="modal-content-id-1">
+                    <div class="slds-theme_shade" style="font-size:18px;">Opportunity Information</div>          
+                    
+                    
+                    
+                    <aura:if isTrue="{!!v.saved}">
+                        
+                        <lightning:recordEditForm
+                                                  onload="{!c.handleLoad}"
+                                                  onsubmit="{!c.handleSubmit}"
+                                                  onsuccess="{!c.handleSuccess}"
+                                                  objectApiName="Opportunity">
+                            <!-- the messages component is for error messages -->
+                            <lightning:messages />
+                            
+                            <lightning:layout  multipleRows="true">
+                                <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="6" padding="around-small">
+                                    <lightning:inputField fieldName="Name" />
+                                </lightning:layoutItem>
+                                <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="6" padding="around-small">
+                                    <lightning:inputField fieldName="AccountId" />
+                                </lightning:layoutItem>
+                                <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="6" padding="around-small">
+                                    <lightning:inputField fieldName="StageName" />
+                                </lightning:layoutItem>
+                                <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="6" padding="around-small">
+                                    <lightning:inputField fieldName="CloseDate" />
+                                </lightning:layoutItem>
+                                <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="6" padding="around-small">
+                                    <lightning:inputField fieldName="Probability" />
+                                </lightning:layoutItem>
+                                <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="6" padding="around-small">
+                                    <lightning:inputField fieldName="Amount" />
+                                </lightning:layoutItem>
+                                
+                                <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12" padding="around-small">
+                                    <div class="slds-theme_shade" style="font-size:18px;">Additional Information</div>
+                                </lightning:layoutItem> 
+                                <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="6" padding="around-small">
+                                    <lightning:inputField fieldName="Location_Preferred__c" />
+                                </lightning:layoutItem>
+                                <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="6" padding="around-small">
+                                    <lightning:inputField fieldName="How_many_people_you_need_to_accommodate__c" />
+                                </lightning:layoutItem>
+                                <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="6" padding="around-small">
+                                    <lightning:inputField fieldName="By_when_you_are_planning_to_buy_property__c" />
+                                </lightning:layoutItem>
+                                <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="6" padding="around-small">
+                                    <lightning:inputField fieldName="Additional_Requests__c" />
+                                </lightning:layoutItem>
+                                
+                                <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12" padding="around-small">
+                                    <div class="slds-theme_shade" style="font-size:18px;">Site Visits Information</div>
+                                </lightning:layoutItem>  
+                                <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="6" padding="around-small">
+                                    <lightning:inputField fieldName="Interested_in_site_visits__c" />
+                                </lightning:layoutItem>
+                                <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="6" padding="around-small">
+                                    <lightning:inputField fieldName="Site_Visit_Date__c" />
+                                </lightning:layoutItem>
+                                 <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12" padding="around-small">
+                                    <div class="slds-theme_shade" style="font-size:18px;">Description</div>
+                                </lightning:layoutItem> 
+                                <lightning:layoutItem size="12" smallDeviceSize="6" mediumDeviceSize="4" largeDeviceSize="6" padding="around-small">
+                                    <lightning:inputField fieldName="Description" />
+                                </lightning:layoutItem>
+                              
+                                
+          
+                                <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="12" largeDeviceSize="12" padding="around-small" class="slds-modal__footer">
+                                  
+                                    <lightning:button variant="destructive" 
+                                                      label="Cancel"
+                                                      title="Cancel"
+                                                      onclick="{! c.closeModel }"/>
+                                    <lightning:button  disabled="{!v.disabled}" variant="brand" type="submit" name="save" label="Save"  />
+                                </lightning:layoutItem>
+                                
+                               
+                                
+                            </lightning:layout>
+                        </lightning:recordEditForm>
+                        
+                        
+                        
+                    </aura:if>
+                    
+                    
+                    
+                </div>
+                <!--###### MODAL BOX FOOTER Part Start ######-->
+                
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        
+    </aura:if>
+</aura:component>

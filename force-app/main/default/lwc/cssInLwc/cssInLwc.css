@@ -1,0 +1,20 @@
+/*elements, classes, pseudoclasses*/
+p{
+    color:red;
+    font-weight: bold;
+}
+
+/*div{
+    color:green;
+    font-weight: bold;
+}*/
+
+.user:hover{
+    color:yellow;
+    font-size:50px;
+}
+
+.sldsToken{
+    color:var(--lwc-brandAccessible);
+    background:var(--lwc-colorBackgroundHighlight);
+}

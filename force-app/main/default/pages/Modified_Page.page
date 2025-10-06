@@ -1,0 +1,33 @@
+<apex:page standardController="Opportunity" showHeader="false" sidebar="false" extensions="DEV_redirectsave" >
+
+     
+    <apex:sectionHeader title="Opportunity Edit" subtitle="New Opportunity"   />
+    
+    <apex:form >
+        <apex:pageBlock title="Opportunity Edit" >
+            <apex:pageBlockSection columns="2" title="Opportunity Information">
+                <apex:inputField value="{!Opportunity.Name}" />
+                <apex:inputField value="{!Opportunity.Amount}"/>
+                <apex:inputField value="{!Opportunity.AccountId}"/>
+                <apex:inputField value="{!Opportunity.CloseDate}"/>
+                <apex:inputField value="{!Opportunity.StageName}"/> 
+                
+            </apex:pageBlockSection>
+            <apex:pageBlockSection columns="2" title="Additional Information" >
+                <apex:inputField value="{!Opportunity.Aadhar_Number__c}"/>
+                <apex:inputField value="{!Opportunity.In_which__c}"/>
+                <apex:inputField value="{!Opportunity.Type_of_flat__c}"/>
+                <apex:inputField value="{!Opportunity.Buy_Rent__c}"/>
+                <apex:inputField value="{!Opportunity.Home_Loan_Required__c}"/>
+                <apex:inputField value="{!Opportunity.Product__c}"/>
+                <apex:inputField value="{!Opportunity.Interior_Designs_Required__c}"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!save_redirect}" value="Save"/>
+                <apex:commandButton action="{!cancel}" value="Cancel"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock> 
+    </apex:form>
+   
+
+</apex:page>

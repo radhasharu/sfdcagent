@@ -1,0 +1,13 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes">
+    
+    <aura:handler name="formsubmit" event="c:FormSubmit" action="{!c.onFormSubmit}"/>
+    
+      <lightning:card title="Search products by vendor" class="slds-m-bottom_xxx-small slds-col slds-size_8-of-12">
+            <c:ShopifySearchProductsForm/>
+        </lightning:card>
+    
+    <lightning:card title="Matching Boats">
+        <c:ShopifySearchPrpducts aura:id="ShopifySearchProductsCmp"/>
+    </lightning:card>
+    
+</aura:component>

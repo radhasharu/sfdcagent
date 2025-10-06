@@ -1,0 +1,14 @@
+<template>
+    <template for:each={projectPolicyList} for:item="projPolicy" for:index="index">
+        <lightning-accordion class="accordion slds-p-bottom_medium" allow-multiple-sections-open onsectiontoggle={handleToggleSection}
+            active-section-name={activeSectionName} key = "{projPolicy.pname}" >
+            <lightning-accordion-section name={projPolicy.pname} label={projPolicy.pname} class="slds-text-title_bold">
+                <div class='normalFont slds-p-top_medium'>
+                        <lightning-datatable  key-field="Name" data={projPolicy.policies}
+                            columns={policyColumns} hide-checkbox-column >
+                        </lightning-datatable>
+                </div>
+            </lightning-accordion-section>
+        </lightning-accordion>
+    </template>
+</template>

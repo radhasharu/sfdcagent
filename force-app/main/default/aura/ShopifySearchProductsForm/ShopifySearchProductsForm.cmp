@@ -1,0 +1,45 @@
+<aura:component controller="ShopExcitingControllerClass">
+    
+    <aura:attribute name="vendorList" type='List' default='[]'/>
+    <aura:attribute name="ObjectName" type="String" default="Product2" /> 
+    <aura:attribute name="Vendor" type="String" default="Vendor__c"/>
+    <aura:handler name="init" value="{!this}" action="{!c.getVendors}"/>
+    
+    <aura:registerEvent name="formsubmit" type="c:FormSubmit"/>   
+    
+    <lightning:layout horizontalAlign="center">
+        
+        <form class="slds-form-element_horizontal slds-form "> 
+            <div class="slds-grid">
+                
+                <lightning:layoutItem size="6">
+                    
+                    <lightning:select aura:id="vendorSelect" 
+                                      label="Select Vendor:"
+                                      variant="label-hidden">
+                        <aura:iteration items="{!v.vendorList}" var="val">
+                            <option value="{!val}"> {!val}</option>
+                        </aura:iteration>
+                        
+                    </lightning:select> 
+                </lightning:layoutItem >
+                
+                <lightning:layoutItem size="6">
+                    <lightning:button label="Search" 
+                                      variant="brand"
+                                      class="slds-m-horizontal_x-small"
+                                      onclick="{!c.onFormSubmit}"
+                                     
+                                      />
+                </lightning:layoutItem>
+                
+                
+                
+            </div>
+        </form>
+        
+        
+    </lightning:layout>
+    
+    
+</aura:component>

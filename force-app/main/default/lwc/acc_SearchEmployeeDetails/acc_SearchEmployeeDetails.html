@@ -1,0 +1,31 @@
+<template>
+
+    <lightning-layout class="slds-p-bottom_large">
+        <lightning-layout-item flexibility="auto">
+            <lightning-input type="search" label='Employee Id' lwc:ref="searchElem" placeholder="Enter Employee ID"></lightning-input>
+        </lightning-layout-item>
+        <lightning-layout-item flexibility="auto" class=" slds-p-left_medium slds-p-top_large">
+            <lightning-button label="Search" onclick={handleSearchEmployee} variant="brand"
+                icon-name="utility:search"></lightning-button>
+        </lightning-layout-item>
+    </lightning-layout>
+    <template lwc:if={employeeNotFound}>
+        <p class="slds-text-color_error slds-text-title_bold"> Employee Not Found</p>
+    </template>
+    <template lwc:if={employeeFound}>
+        <div class="slds-card_boundary">
+            <lightning-card title="Employee Details">
+                <lightning-button class="slds-text-heading_small slds-float_right" style='border-radius: 12px;'
+                    slot="actions" label="Edit Details" onclick={handleEnableEdit}
+                    variant="brand-outline"></lightning-button>
+                <lightning-record-form object-api-name={objApiName} record-id={employeeId} fields={fields} columns="2"
+                    mode={formMode} onsuccess={handleSuccess} oncancel={handleCancel}></lightning-record-form>
+            </lightning-card>
+        </div>
+    </template>
+
+    <template lwc:if={showSpinner}>
+        <lightning-spinner alternative-text="Loading" size="small" variant="brand"></lightning-spinner>
+    </template>
+
+</template>

@@ -1,0 +1,14 @@
+<apex:page controller="accountrecordsclass">
+<apex:form >
+<apex:pageBlock >
+<apex:pageBlockTable value="{!acclist}" var="acc">
+<apex:column headerValue="Accountname">
+<apex:outputText value="{!acc.name}"/>
+</apex:column>
+<apex:column headerValue="Account Number">
+<apex:outputText value="{!acc.accountnumber}"/>
+</apex:column>
+</apex:pageBlockTable>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

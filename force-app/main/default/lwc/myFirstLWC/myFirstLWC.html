@@ -1,0 +1,27 @@
+<template>
+
+    <lightning-card title="Contact List">
+        <div class="slds-m-around_medium">
+            <template for:each = {contactList} for:item = 'con'>
+                <p key = {con.Id}>{con.FirstName}  {con.LastName}</p>
+            </template>
+        </div>
+    </lightning-card>
+    <lightning-card title="Create Contact Record">
+        <div class="slds-m-around_medium">
+
+            <lightning-input type="text" label="First Name" class = 'firstName'></lightning-input>
+
+            <lightning-input type="text" label="Last Name" class = 'lastName'></lightning-input>
+
+            <lightning-input type="email" label="Email Name" class = 'email'></lightning-input>
+
+            <lightning-input type="text" label="Phone" class = 'phone'></lightning-input>
+
+            <lightning-button variant="brand" label="Save" title="Primary action" onclick={handleClick}
+                class="slds-m-left_x-small"></lightning-button>
+
+        </div>
+    </lightning-card>
+
+</template>

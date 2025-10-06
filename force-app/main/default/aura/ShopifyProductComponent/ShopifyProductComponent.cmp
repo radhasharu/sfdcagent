@@ -1,0 +1,32 @@
+<aura:component controller='ShopExcitingControllerClass' implements="force:appHostable,flexipage:availableForAllPageTypes"  access="global">
+    <aura:attribute name="products" type="Product2[]"/>
+    <aura:attribute name="sizeList" type="List"/> 
+    <aura:dependency resource="markup://force:navigateToComponent" type="EVENT"/>
+    <aura:handler name="init" value="{!this}" action="{!c.fetchList}"/>
+    <table class="slds-table slds-table--bordered slds-table--striped slds-table--cell-buffer slds-table--fixed-layout">
+        <thead>
+            <tr class="slds-text-heading--label">
+                <th scope="col"><div class="slds-truncate" title="Product_Id__c">Product ID</div></th>
+                <th scope="col"><div class="slds-truncate" title="Name">Name</div></th>
+                <th scope="col"><div class="slds-truncate" title="Product_Description__c">Product Description</div></th>
+                <th scope="col"><div class="slds-truncate" title="Product_Image__c">Product Image</div></th>
+                <th scope="col"><div class="slds-truncate" title="Price__c">Price</div></th>
+            </tr>
+        </thead>
+        <tbody>
+            <aura:iteration items="{!v.products}" var ="p">
+                <tr>
+                    <th scope="row"><div class="slds-truncate" title="{!p.Product_Id__c}">{!p.Product_Id__c}</div></th>
+                    <td><div class="slds-truncate" title="{!p.Name}">{!p.Name}</div></td>
+                    <td><div class="slds-truncate" title="{!p.Product_Description__c}">{!p.Product_Description__c}</div></td>
+                    <td><div class="slds-truncate productImage" title="{!p.Product_Image__c}">
+                        <img src="{!p.Product_Image__c}" alt="No Image"/>
+                        </div>
+                    </td>
+                    <td><div class="slds-truncate" title="{!p.Price__c}">{!p.Price__c}</div></td>
+                   
+                </tr>
+            </aura:iteration>                            
+        </tbody>
+    </table>
+</aura:component>

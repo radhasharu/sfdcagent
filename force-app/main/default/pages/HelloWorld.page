@@ -1,0 +1,10 @@
+<apex:page >
+
+    <apex:pageMessage severity="confirm" summary="Congrats Lead is converted successfully" strength="1"></apex:pageMessage>
+  <!-- Begin Default Content REMOVE THIS -->
+  <h1>Congratulations</h1>
+  This is your new Page: HelloWorld
+  <!-- End Default Content REMOVE THIS -->
+  
+  <h1>Hello World</h1>
+</apex:page>

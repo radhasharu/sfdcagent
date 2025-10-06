@@ -1,0 +1,26 @@
+<apex:page standardController="Order_Cancel__c" showHeader="true" >
+
+
+
+    <body>
+    <apex:form >
+    <apex:pageBlock id="theBlock">
+    <apex:pageBlockSection columns="2" title="Cancellation Information">
+       <apex:inputCheckbox value="{!Order_Cancel__c.Cancelled__c}">
+         <apex:actionSupport event="onchange" rerender="theBlock"/>
+   </apex:inputCheckbox>
+
+ 
+   <apex:inputField value="{!Order_Cancel__c.Cancellation_Date__c}" rendered="{!(Order_Cancel__c.Cancelled__c== true)}"/>
+   <apex:inputField value="{!Order_Cancel__c.Reason_for_cancellation__c}" rendered="{!(Order_Cancel__c.Cancelled__c== true)}"/>
+   </apex:pageBlockSection>
+   
+   <apex:pageBlockButtons >
+                <apex:commandButton action="{!save}" value="Save"/>
+                <apex:commandButton action="{!cancel}" value="Cancel"/>
+            </apex:pageBlockButtons>
+</apex:pageBlock>
+
+</apex:form>
+</body>
+</apex:page>

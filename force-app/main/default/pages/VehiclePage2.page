@@ -1,0 +1,53 @@
+<apex:page controller="VehicleController" sidebar="false" showHeader="false"  standardStylesheets="false">
+    <apex:stylesheet value="{!$Resource.bootstrap}" />
+    <apex:form >
+        <div class="container" >
+            <div class="alert alert-primary">
+                <h1 class="text-center" style="font-family:monotype corsiva">Vehicle Management System</h1>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <apex:pageBlock id="block1">
+                        <apex:pageBlockTable value="{!vehicles}" var="vehicle" styleClass="table table-bordered table-striped">
+                            <apex:column >
+                                <apex:commandLink value="{!vehicle.Name}" action="{!getDetails2}" rerender="block1,block2" id="Name">
+                                    <apex:param assignTo="{!vehicleMake}" value="{!vehicle.Vehicle_Make__c}" name="vehMake"/>
+                                    <apex:param assignTo="{!vehicleModel}" value="{!vehicle.Name}" name="vehName"/>
+                                    <apex:param assignTo="{!vehicleId}" value="{!vehicle.Id}" name="vehId"/>
+                                    
+                                </apex:commandLink>
+                                <apex:facet name="header">Vehicle Model</apex:facet>
+                            </apex:column>
+                            <apex:column value="{!vehicle.Vehicle_Make__c}"/>   
+                            <apex:column value="{!vehicle.Num_of_Vehicles__c}"/>   
+                        </apex:pageBlockTable>
+                    </apex:pageBlock>
+                </div>
+                <div class="col-md-6" >
+                    
+                    <apex:pageBlock id="block2"  >
+                        <h4 align="center" style="color:red;font-family:montotype corsiva">
+                            {!vehicleModel} {!vehicleMake}
+                        </h4>
+                        <apex:pageBlockTable value="{!vehicleDetails}" var="d" styleClass="table table-bordered table-striped" rendered="{!showDetails}">
+                            <apex:column value="{!d['tot_driven']}"> 
+                                <apex:facet name="header">Total Kms Driven</apex:facet>
+                            </apex:column>	
+                            <apex:column value="{!d['tot_income']}"> 
+                                <apex:facet name="header">Total Income</apex:facet>
+                            </apex:column>
+                            <apex:column value="{!d['min_date']}"> 
+                                <apex:facet name="header">First Registration Date</apex:facet>
+                            </apex:column>
+                            <apex:column value="{!d['max_date']}"> 
+                                <apex:facet name="header">Last Reg Date</apex:facet>
+                            </apex:column>
+                        </apex:pageBlockTable>
+                    </apex:pageBlock>
+                </div>
+                
+            </div>
+        </div>
+    </apex:form>
+</apex:page>

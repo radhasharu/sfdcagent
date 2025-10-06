@@ -1,0 +1,72 @@
+<apex:page controller="OpportunityListClass"  doctype="html-5.0">
+    <apex:stylesheet value="{!$Resource.bootstrap}" />
+    <apex:form >
+        <div class="container" >
+            <div class="alert alert-primary">
+                <h1 class="text-center" style="font-family:monotype corsiva">Opportunities</h1>
+            </div>
+            <div class="input-group">
+                <apex:inputText styleClass="form-control" value="{!searchKey}" html-placeholder="Search"/>
+                <div class="input-group-btn">
+                    <apex:commandButton value="Search" action="{!search}"  styleClass="btn btn-primary"/>
+                    <apex:commandButton value="Clear" action="{!clearOpp}" StyleClass="btn btn-primary" />
+                </div>
+            </div>
+            <br/>
+            <apex:pageBlock id="Block1" rendered="{!display}"  mode="inlineEdit">
+                
+                <apex:pageBlockTable value="{!opportunities}" var="opp" styleClass="table table-bordered table-striped">
+                    <!--apex:column value="{!opp.Name}"/-->
+                    <apex:column >
+                        <apex:outputField value="{!opp.Name}"/>
+                        <apex:facet name="header">Opportunity Name</apex:facet>
+                    </apex:column>
+                    <apex:column >
+                        <apex:outputField value="{!opp.StageName}">
+                        </apex:outputField> 
+                        <apex:facet name="header">Stage Name</apex:facet>
+                    </apex:column>
+                    <apex:column >
+                        <apex:outputField value="{!opp.AccountId}">
+                        </apex:outputField> 
+                        <apex:facet name="header">Account Name</apex:facet>
+                    </apex:column>
+                    <apex:column >
+                        <apex:outputField value="{!opp.CloseDate}">
+                        </apex:outputField> 
+                        <apex:facet name="header">Close Date</apex:facet>
+                    </apex:column> 
+                    <apex:inlineEditSupport event="ondblClick" showOnEdit="saveButton,cancelButton"   resetFunction="resetInlineEdit"/>
+                </apex:pageBlockTable>
+                <apex:pageblockButtons location="bottom">
+                    <apex:commandButton value="First" action="{!Beginning}" disabled="{!prev}" reRender="Block1" styleClass="btn btn-primary"/>&nbsp;
+                    <apex:commandButton value="Previous" action="{!Previous}" disabled="{!prev}" reRender="Block1" styleClass="btn btn-primary"/>&nbsp;
+                    <apex:commandButton value="Next" action="{!Next}" disabled="{!nxt}" reRender="Block1" styleClass="btn btn-primary"/>&nbsp;
+                    <apex:commandButton value="Last" action="{!End}" disabled="{!nxt}" reRender="Block1" styleClass="btn btn-primary"/>&nbsp;
+                </apex:pageblockButtons>   
+                <apex:pageBlockButtons location="top">
+                    <apex:commandButton action="{!save}" id="saveButton" value="Save" style="display:none" styleClass="btn btn-primary" />&nbsp;
+                    <apex:commandButton onclick="resetInlineEdit()" id="cancelButton" value="Cancel" style="display:none" styleClass="btn btn-primary"/>
+                </apex:pageBlockButtons>
+            </apex:pageBlock>
+            
+            <apex:pageBlock id="Block2" rendered="{!displaySearch}">
+                <apex:pageBlockTable value="{!searchOpportunity}" var="searchOpp" styleClass="table table-bordered table-striped">
+                    <!--apex:column value="{!searchOpp.Name}"/-->
+                    <apex:column >
+                        <apex:outputLink value="https://radha13-dev-ed.lightning.force.com/{!searchOpp.Id}" id="theLink">{!searchOpp.Name}</apex:outputLink>
+                        <apex:facet name="header">Opportunity Name</apex:facet>
+                    </apex:column>
+                    <apex:column value="{!searchOpp.StageName}"/>   
+                    <apex:column value="{!searchOpp.CloseDate}"/>   
+                    <apex:inlineEditSupport event="ondblClick" showOnEdit="saveButton,cancelButton" resetFunction="resetInlineEdit"/>
+                </apex:pageBlockTable>
+                <apex:pageBlockButtons location="top">
+                    <apex:commandButton action="{!saveSearch}" id="saveButton" value="Save" style="display:none" styleClass="btn btn-primary" />&nbsp;
+                    <apex:commandButton onclick="resetInlineEdit()" id="cancelButton" value="Cancel" style="display:none" styleClass="btn btn-primary"/>
+                </apex:pageBlockButtons>
+            </apex:pageBlock>
+            
+        </div>
+    </apex:form>
+</apex:page>

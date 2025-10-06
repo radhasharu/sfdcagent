@@ -1,0 +1,158 @@
+<template>
+    <lightning-card>
+        <div class="slds-m-around_medium">
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_6-of-12 slds-p-right_xx-small slds-p-left_xx-small">
+                    <lightning-combobox label='Select User Search Field' value={userSearchField}
+                        options={userSearchOptions} onchange={handleUserSearchFieldChange}></lightning-combobox>
+                </div>
+                <div class="slds-col slds-size_6-of-12 slds-p-right_xx-small slds-p-left_xx-small">
+                    <lightning-combobox label='Select PS Search Field' value={psSearchField} options={psSearchOptions}
+                        onchange={handlePSSearchFieldChange}></lightning-combobox>
+                </div>
+                <div class="slds-col slds-size_6-of-12 slds-p-right_xx-small slds-p-left_xx-small">
+                    <label class="slds-form-element__label">User</label>
+                    <div class="slds-combobox_container">
+                        <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open"
+                            aria-expanded="true" aria-haspopup="listbox" role="combobox">
+                            <!-- Search Input -->
+                            <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right"
+                                role="none">
+                                <lightning-input disabled={disabledUserInput} class="inputBox"
+                                    placeholder={userPlaceHolder} onkeyup={filterUsers} onblur={blurEventUser}
+                                    value={searchStringUser} auto-complete="off" variant="label-hidden"
+                                    id="combobox-id-1"></lightning-input>
+                                <lightning-icon class="slds-input__icon" icon-name="utility:down" size="x-small"
+                                    alternative-text="search"></lightning-icon>
+                            </div>
+                            <!-- Dropdown List -->
+                            <template if:true={showDropdownUser}>
+                                <div id="listbox-id-1" class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid">
+                                    <ul class="slds-listbox slds-listbox_vertical recordListBox" role="presentation">
+                                        <template if:false={messageUser}>
+                                            <template for:each={optionDataUser} for:item="option">
+                                                <template if:true={option.isVisible}>
+                                                    <li key={option.value} data-id={option.value}
+                                                        onmousedown={selectItemUser}
+                                                        class="slds-listbox__item eachItem">
+                                                        <template if:true={option.selected}>
+                                                            <lightning-icon icon-name="utility:check" size="x-small"
+                                                                alternative-text="icon"></lightning-icon>
+                                                        </template>
+                                                        <span
+                                                            class="slds-media slds-listbox__option_entity verticalAlign slds-truncate">{option.label}</span>
+                                                    </li>
+                                                </template>
+                                            </template>
+                                        </template>
+                                        <template if:true={messageUser}>
+                                            <li class="slds-listbox__item">
+                                                <span
+                                                    class="slds-media slds-listbox__option_entity verticalAlign slds-truncate">{messageUser}</span>
+                                            </li>
+                                        </template>
+                                    </ul>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                    <br />
+                    <!-- Multi Select Pills -->
+                    <template for:each={optionDataUser} for:item="option">
+                        <template if:true={option.selected}>
+                            <lightning-pill key={option.value} class="slds-m-around_xx-small" name={option.value}
+                                label={option.label} onremove={removePillUser}></lightning-pill>
+                        </template>
+                    </template>
+
+                </div>
+                <div class="slds-col slds-size_6-of-12 slds-p-right_xx-small slds-p-left_xx-small">
+                    <label class="slds-form-element__label">Permission Set</label>
+                    <div class="slds-combobox_container">
+                        <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open"
+                            aria-expanded="true" aria-haspopup="listbox" role="combobox">
+                            <!-- Search Input -->
+                            <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right"
+                                role="none">
+                                <lightning-input disabled={disabledPSInput} class="inputBox"
+                                    placeholder={psPlaceHolder} onkeyup={filterPS}
+                                    onblur={blurEventPS} value={searchStringPS} auto-complete="off"
+                                    variant="label-hidden" id="combobox-id-2"></lightning-input>
+                                <lightning-icon class="slds-input__icon" icon-name="utility:down" size="x-small"
+                                    alternative-text="search"></lightning-icon>
+                            </div>
+                            <!-- Dropdown List -->
+                            <template if:true={showDropdownPS}>
+                                <div id="listbox-id-2" class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid">
+                                    <ul class="slds-listbox slds-listbox_vertical recordListBox" role="presentation">
+                                        <template if:false={messagePS}>
+                                            <template for:each={optionDataPS} for:item="option">
+                                                <template if:true={option.isVisible}>
+                                                    <li key={option.value} data-id={option.value}
+                                                        onmousedown={selectItemPS} class="slds-listbox__item eachItem">
+                                                        <template if:true={option.selected}>
+                                                            <lightning-icon icon-name="utility:check" size="x-small"
+                                                                alternative-text="icon"></lightning-icon>
+                                                        </template>
+                                                        <span
+                                                            class="slds-media slds-listbox__option_entity verticalAlign slds-truncate">{option.label}</span>
+                                                    </li>
+                                                </template>
+                                            </template>
+                                        </template>
+                                        <template if:true={messagePS}>
+                                            <li class="slds-listbox__item">
+                                                <span
+                                                    class="slds-media slds-listbox__option_entity verticalAlign slds-truncate">{messagePS}</span>
+                                            </li>
+                                        </template>
+                                    </ul>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                    <br />
+                    <!-- Multi Select Pills -->
+                    <template for:each={optionDataPS} for:item="option">
+                        <template if:true={option.selected}>
+                            <lightning-pill key={option.value} class="slds-m-around_xx-small" name={option.value}
+                                label={option.label} onremove={removePillPS}></lightning-pill>
+                        </template>
+                    </template>
+                </div>
+            </div>
+            <br />
+            <br />
+            <lightning-button variant="brand" label="Assign" title="Assign Permission Set" onclick={assignPS}
+                disabled={disableButton} class=" slds-float_right slds-m-right_x-small"></lightning-button>
+            <lightning-button variant="neutral" label="Reset" title="Reset" onclick={resetForm}
+                class=" slds-float_right slds-m-right_x-small"></lightning-button>
+        </div>
+        <br />
+        <br />
+
+        <template if:true={showTable}>
+            <lightning-datatable key-field="userId" hide-checkbox-column data={tableData} columns={tableColumns}>
+            </lightning-datatable>
+            <br/>
+            <div class='slds-align_absolute-center'>
+                <lightning-button-icon icon-name="utility:left" title="Previous" onclick={handlePreviousPage}
+                    disabled={disPrev}>
+                </lightning-button-icon>
+                <span> {currentPage} - {totalPages} </span>
+                <lightning-button-icon icon-name="utility:right" title="Next" onclick={handleNextPage}
+                    disabled={disNext}>
+                </lightning-button-icon>
+            </div>
+            <br />
+            <br />
+            <lightning-button variant="brand" label="Download Complete Result" title="Download Complete Result"
+                onclick={downloadResult} class=" slds-float_right slds-m-right_x-small"></lightning-button>
+            <br />
+            <br />
+
+        </template>
+
+    </lightning-card>
+
+</template>

@@ -1,0 +1,103 @@
+<apex:page StandardController="Lead" extensions="DEVC_LeadDetail" docType="html-5.0"   >
+<apex:stylesheet value="{!$Resource.bootstrap}" />
+ <style>
+    
+     .custPopup{
+        background-color: white;
+        border-width: 2px;
+        border-style: solid;
+        z-index: 9999;
+        left: 50%;
+        padding:10px;
+        position: absolute;
+        /* These are the 3 css properties you will need to change so the popup
+        displays in the center of the screen. First set the width. Then set
+        margin-left to negative half of what the width is. You can add
+        the height property for a fixed size pop up if you want.*/
+        width: 800px;
+        margin-left: -400px;
+        top:100px;
+    }
+    .popupBackground{
+        background-color:black;
+        opacity: 0.20;
+        filter: alpha(opacity = 20);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 9998;
+    }
+ </style>
+ 
+ <script>
+     function func1(){
+         convertLead();
+         return false;       
+     }
+ </script>
+            <apex:pageMessages id="msg2"></apex:pageMessages>
+            <apex:sectionHeader title="Lead" subtitle="Lead Details"   />
+            <apex:form id="frm1">
+            <apex:actionFunction name="convertLead" action="{!convert}" />
+                <apex:pageBlock >
+                    <apex:pageBlockSection columns="2" title="Lead Information">
+                       
+                        <apex:outputField value="{!lead.firstname}"/>
+                        
+                        <apex:outputField value="{!lead.lastname}"/>
+                        
+                        <apex:outputField value="{!lead.company}"/>
+                        
+                        <apex:outputField value="{!lead.email}"/>
+                        
+                        <apex:outputField value="{!lead.phone}"/>
+                      <c:NewSpinner />
+                    </apex:pageBlockSection>
+                    <apex:pageBlockButtons >
+                        <apex:commandButton status="pageStatus" value="CONVERT" action="{!showPopup}" />
+                    </apex:pageBlockButtons>
+                </apex:pageBlock>
+         
+   
+
+
+    <apex:outputPanel id="tstpopup">
+        <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!displayPopUp}"/>
+        <apex:outputPanel styleClass="custPopup" layout="block" rendered="{!displayPopUp}">
+        <apex:pageMessages id="msgId"  />
+            <h1 class="text-center" style="font-family:monotype corsiva;">Convert lead</h1>
+            <hr size="3px" color="gray"/>
+               
+              
+               
+                <apex:pageBlock >
+                   <apex:pageBlockSection title="Account Details">
+                    <apex:input type="text" value="{!mwrapper.accSite}" label="Account Site"/>
+                    </apex:pageBlockSection> 
+                    <apex:pageBlockSection title="Contact Details">
+                    <apex:input type="email" value="{!mwrapper.conEmail}" label="Contact Email"/>
+                     
+                     </apex:pageBlockSection> 
+                    <apex:pageBlockSection title="Opportunity Details">
+                        <apex:input type="text" value="{!mwrapper.oppName}" label="Opportunity Name"/>
+                        <apex:input type="date" label="Closed Date" value="{!mwrapper.oppClosedDate }"/>
+                        <apex:selectList label="Stage" value="{!mwrapper.selectedStage}" size="1">
+                             <apex:selectOptions value="{!stageOptions}" />
+                             
+                         </apex:selectList>
+                         <c:NewSpinner ></c:NewSpinner>
+                    </apex:pageBlockSection> 
+                      
+                </apex:pageBlock>
+            
+            <apex:commandButton value="Cancel" action="{!closePopup}" rerender="tstpopup"/>&nbsp;&nbsp;
+            <apex:commandButton value="Convert"  status="pageStatus" onclick="func1();"  rerender="tstpopup"/>
+            
+        </apex:outputPanel>
+    </apex:outputPanel>
+
+</apex:form>
+
+</apex:page>

@@ -1,0 +1,16 @@
+<!--c:ceHandler-->
+<aura:component implements= "force:lightningQuickAction,force:hasRecordId">
+    <aura:attribute name="messageFromEvent" type="String"/>
+    <aura:attribute name="numEvents" type="Integer" default="0"/>
+
+    <!-- Note that name="cmpEvent" in aura:registerEvent
+     in ceNotifier.cmp -->
+    <aura:handler name="cmpEvent" event="c:TestEvent" action="{!c.handleComponentEvent}"/>
+
+    <!-- handler contains the notifier component -->
+    <c:TestCompNotifier />
+    
+    <p>{!v.messageFromEvent}</p>
+    <p>Number of events: {!v.numEvents}</p>
+
+</aura:component>

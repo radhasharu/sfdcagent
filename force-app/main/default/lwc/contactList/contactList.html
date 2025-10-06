@@ -1,0 +1,23 @@
+<template>
+
+    <lightning-card title="contact List">
+
+        <lightning-input type="text" label = 'Enter text' onchange = {handleChange}></lightning-input>
+
+
+        <div class="slds-m-around_medium">
+            <lightning-datatable
+            key-field= "Id"
+            data = {contactList}
+            columns= {columns}
+            hide-checkbox-column="true">
+
+            </lightning-datatable>
+
+            <template if:true={errors}>
+                <p>{errors}</p>
+            </template>
+        </div>
+    </lightning-card>
+
+</template>

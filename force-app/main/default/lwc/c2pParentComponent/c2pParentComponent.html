@@ -1,0 +1,15 @@
+<template>
+
+    <lightning-card  title="Child to Parent Communication Using Simple Events">
+        <div class="slds-m-around_medium"  onclose = {closeModal}>
+            <lightning-button variant="success" label="Open Model" title="Successful action" onclick={handleClick} 
+            class="slds-m-left_x-small"></lightning-button>
+            {msg}
+            <template lwc:if ={showModel}>
+                <c-c2p-model-component></c-c2p-model-component>
+            </template>
+        </div>
+
+    </lightning-card>
+    
+</template>

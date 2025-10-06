@@ -1,0 +1,18 @@
+<template>
+    <lightning-card  title="Parent to Child Communication using non-Primitive Data Type">
+        <div class="slds-m-around_medium">
+            <lightning-carousel disable-auto-scroll>
+                <template for:each = {carouselDetails} for:item = "cardetail">
+                <lightning-carousel-image key ={cardetail.header}
+                    src = {cardetail.src}
+                    header = {cardetail.header}
+                    description = {cardetail.description}
+                    alternative-text = {cardetail.alternativeText}
+                    href = {cardetail.href}>
+                </lightning-carousel-image>
+            </template>
+            </lightning-carousel>
+            </div>
+        </lightning-card>
+    
+</template>

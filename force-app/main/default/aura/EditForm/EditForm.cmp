@@ -1,0 +1,11 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:appHostable">
+    <!--Component Start-->
+    <div class="slds-m-around_xx-large">
+        <lightning:recordEditForm objectApiName="Case" aura:id="accForm" recordId = "">
+            <lightning:messages />
+            <lightning:inputField fieldName="SLAViolation__c"/>
+        </lightning:recordEditForm>
+        <lightning:button variant="brand" type="button" name="Save" label="Save" onclick="{!c.handleCreateAccount}" />
+    </div>
+    <!--Component End-->
+</aura:component>

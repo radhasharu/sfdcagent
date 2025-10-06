@@ -1,0 +1,25 @@
+<apex:page controller="DEVC_MyCustomController">
+       
+        <script>
+        function func1(){
+        getParam();
+        return false;
+        }
+        
+              </script>
+        <apex:form >
+         <apex:actionFunction name="getParam" action="{!getUrlParam}" oncomplete="alert(Successfull);" rerender="blk1"/>
+
+            <apex:pageBlock >
+                        
+                <apex:pageBlockSection id="blk1" >{!urlParam}</apex:pageBlockSection>
+                
+                               
+          <apex:commandButton value="Save" onclick="func1();" />
+                 
+            </apex:pageBlock>
+        
+       
+      
+        </apex:form>
+</apex:page>

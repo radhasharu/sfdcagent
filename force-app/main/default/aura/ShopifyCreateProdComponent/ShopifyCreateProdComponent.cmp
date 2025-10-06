@@ -1,0 +1,8 @@
+<aura:component access="global">
+    <aura:dependency resource="markup://force:navigateToComponent" type="EVENT"/>
+    <div class="slds-m-around_large">
+        <c:ShopifyHeaderComponent/>
+                 
+    </div>
+    
+</aura:component>

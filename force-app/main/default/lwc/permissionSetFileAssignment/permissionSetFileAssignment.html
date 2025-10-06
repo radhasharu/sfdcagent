@@ -1,0 +1,25 @@
+<template>
+	<lightning-layout class='slds-p-bottom_xx-large'>
+		<lightning-layout-item flexibility="auto" padding='horizontal-small'>
+			<lightning-card>
+				<div class="slds-m-around_medium">
+					<p style='font-size:18px; font-weight:bold'> Upload .csv file in the format <a
+							onclick={downloadPSFile}>PermissionSetAssignment</a></p>
+
+					<lightning-input label="" name="file uploader" onchange={handleFilesChange} type="file">
+					</lightning-input>
+
+					<div class="error-message">{fileName}</div>
+
+					<lightning-button class="upload-button" label={UploadFile} onclick={handleSave} variant="brand"
+						disabled={isTrue}></lightning-button>
+
+				</div>
+				</lightning-file-upload>
+				</div>
+			</lightning-card>
+		</lightning-layout-item>
+
+	</lightning-layout>
+
+</template>

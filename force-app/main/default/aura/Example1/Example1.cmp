@@ -1,0 +1,10 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" controller = "getContactsController" access="global" >
+    <aura:attribute name="greetings" type="String" default="Good Morning"/>
+    <aura:attribute name="totalcontact" type="Integer" />
+     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <p>Hello!!! {!v.greetings}
+    <lightning:input aura:id= "a1" type="text" value = "{!v.greetings}"></lightning:input>
+    </p>
+    <p> Number of Contacts {!v.totalcontact}</p>
+	
+</aura:component>
